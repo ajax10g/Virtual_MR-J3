@@ -1,1 +1,1369 @@
-[{"id":"2526c01.e3cb34","type":"tab","label":"MR-J3 Response","disabled":false,"info":""},{"id":"cc7fae7e.ad2a3","type":"serial-port","serialport":"/dev/ttyUSB1","serialbaud":"9600","databits":"8","parity":"even","stopbits":"1","waitfor":"","dtr":"none","rts":"none","cts":"none","dsr":"none","newline":"10","bin":"bin","out":"interbyte","addchar":"","responsetimeout":"10000"},{"id":"75b88026.ea13d","type":"debug","z":"2526c01.e3cb34","name":"","active":false,"tosidebar":true,"console":false,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":290,"y":340,"wires":[]},{"id":"cb737bf3.f58ad8","type":"serial in","z":"2526c01.e3cb34","name":"RS232 Rx","serial":"cc7fae7e.ad2a3","x":100,"y":260,"wires":[["75b88026.ea13d","7364fe42.159b7"]]},{"id":"8d0f4233.7ed23","type":"serial out","z":"2526c01.e3cb34","name":"RS232 Tx","serial":"cc7fae7e.ad2a3","x":500,"y":860,"wires":[]},{"id":"fe23cbaf.cca308","type":"delay","z":"2526c01.e3cb34","name":"","pauseType":"delay","timeout":"1","timeoutUnits":"milliseconds","rate":"1","nbRateUnits":"1","rateUnits":"second","randomFirst":"1","randomLast":"5","randomUnits":"seconds","drop":false,"x":350,"y":860,"wires":[["8d0f4233.7ed23"]]},{"id":"94f0a46d.c8da28","type":"debug","z":"2526c01.e3cb34","name":"","active":false,"tosidebar":true,"console":false,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":490,"y":120,"wires":[]},{"id":"5f8b00c2.a4e16","type":"buffer-parser","z":"2526c01.e3cb34","name":"M:Data Req","data":"payload","dataType":"msg","specification":"spec","specificationType":"ui","items":[{"type":"byte","name":"SOH","offset":0,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Sta","offset":1,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Cmd","offset":2,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"STX","offset":4,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"DataNo","offset":5,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"ETX","offset":7,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Chk","offset":8,"length":2,"offsetbit":0,"scale":"1","mask":""}],"swap1":"","swap2":"","swap3":"","swap1Type":"swap","swap2Type":"swap","swap3Type":"swap","msgProperty":"payload","msgPropertyType":"str","resultType":"object","resultTypeType":"output","multipleResult":false,"fanOutMultipleResult":false,"setTopic":true,"outputs":1,"x":310,"y":120,"wires":[["94f0a46d.c8da28","1cdd4222.d0150e","af9600df.f2a21","9cd53aea.5d9bb8","2fd2d0d4.14b59","9ba0bcb5.f5fba","23f23cd9.9bb824","abcc933a.e9f52","6df5a619.591488","8a689913.23bcb8","203c5272.b6068e","b4ad5305.4c058","7bc8cc12.a67ff4"]]},{"id":"7364fe42.159b7","type":"function","z":"2526c01.e3cb34","name":"SOH|STX","func":"if (msg.payload[0]==flow.get('SOH')){\n    return [msg, null];\n}else if (msg.payload[0]==flow.get('STX')){\n    return [null, msg];\n}","outputs":2,"noerr":0,"initialize":"","finalize":"","x":110,"y":200,"wires":[["666dfdf4.3ad5f4"],[]]},{"id":"d42a45cb.34c828","type":"function","z":"2526c01.e3cb34","name":"Global Defines","func":"\n","outputs":1,"noerr":0,"initialize":"// Code added here will be run once\n// whenever the node is deployed.\nflow.set(\"SOH\",0x1);\nflow.set(\"STX\",0x2);\nflow.set(\"ETX\",0x3);\nflow.set(\"EOT\",0x4);","finalize":"","x":100,"y":20,"wires":[[]]},{"id":"6883651.9b48b9c","type":"buffer-parser","z":"2526c01.e3cb34","name":"M:Data4","data":"payload","dataType":"msg","specification":"spec","specificationType":"ui","items":[{"type":"byte","name":"SOH","offset":0,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"STA","offset":1,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Cmd","offset":2,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"STX","offset":4,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"DataNo","offset":5,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Data","offset":10,"length":4,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"ETX","offset":7,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Chk","offset":8,"length":2,"offsetbit":0,"scale":"1","mask":""}],"swap1":"","swap2":"","swap3":"","swap1Type":"swap","swap2Type":"swap","swap3Type":"swap","msgProperty":"payload","msgPropertyType":"str","resultType":"keyvalue","resultTypeType":"output","multipleResult":false,"fanOutMultipleResult":false,"setTopic":true,"outputs":1,"x":300,"y":160,"wires":[["4069043b.187f0c"]]},{"id":"c5dee0a1.bbb56","type":"buffer-parser","z":"2526c01.e3cb34","name":"M:Data8","data":"payload","dataType":"msg","specification":"spec","specificationType":"ui","items":[{"type":"byte","name":"SOH","offset":0,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"STA","offset":1,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Cmd","offset":2,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"STX","offset":4,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"DataNo","offset":5,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Data","offset":10,"length":8,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"ETX","offset":7,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Chk","offset":8,"length":2,"offsetbit":0,"scale":"1","mask":""}],"swap1":"","swap2":"","swap3":"","swap1Type":"swap","swap2Type":"swap","swap3Type":"swap","msgProperty":"payload","msgPropertyType":"str","resultType":"keyvalue","resultTypeType":"output","multipleResult":false,"fanOutMultipleResult":false,"setTopic":true,"outputs":1,"x":300,"y":200,"wires":[["8dc59b9f.3374d8"]]},{"id":"1b080179.7354bf","type":"buffer-parser","z":"2526c01.e3cb34","name":"M:Data12","data":"payload","dataType":"msg","specification":"spec","specificationType":"ui","items":[{"type":"byte","name":"SOH","offset":0,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"STA","offset":1,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Cmd","offset":2,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"STX","offset":4,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"DataNo","offset":5,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Data","offset":10,"length":12,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"ETX","offset":7,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Chk","offset":8,"length":2,"offsetbit":0,"scale":"1","mask":""}],"swap1":"","swap2":"","swap3":"","swap1Type":"swap","swap2Type":"swap","swap3Type":"swap","msgProperty":"payload","msgPropertyType":"str","resultType":"keyvalue","resultTypeType":"output","multipleResult":false,"fanOutMultipleResult":false,"setTopic":true,"outputs":1,"x":300,"y":240,"wires":[["d118e8bc.5115a8"]]},{"id":"e1687332.023c9","type":"buffer-parser","z":"2526c01.e3cb34","name":"M:Data16","data":"payload","dataType":"msg","specification":"spec","specificationType":"ui","items":[{"type":"byte","name":"SOH","offset":0,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"STA","offset":1,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Cmd","offset":2,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"STX","offset":4,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"DataNo","offset":5,"length":2,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Data","offset":10,"length":16,"offsetbit":0,"scale":"1","mask":""},{"type":"byte","name":"ETX","offset":7,"length":1,"offsetbit":0,"scale":"1","mask":""},{"type":"ascii","name":"Chk","offset":8,"length":2,"offsetbit":0,"scale":"1","mask":""}],"swap1":"","swap2":"","swap3":"","swap1Type":"swap","swap2Type":"swap","swap3Type":"swap","msgProperty":"payload","msgPropertyType":"str","resultType":"keyvalue","resultTypeType":"output","multipleResult":false,"fanOutMultipleResult":false,"setTopic":true,"outputs":1,"x":300,"y":280,"wires":[["538ad41f.5b87ec"]]},{"id":"666dfdf4.3ad5f4","type":"function","z":"2526c01.e3cb34","name":"0|4|8|12|16","func":"data=msg.payload.slice(7,-3);\n\nif (data.length==0){\n    return [msg, null, null, null,null];\n}else if (data.length==4){\n    return [null, msg, null, null, null];\n}else if (data.length==8){\n    return [null, null, msg, null, null];\n}else if (data.length==12){\n    return [null, null, null, msg, null];\n}else if (data.length==16){\n    return [null, null, null, null, msg];\n}","outputs":5,"noerr":0,"initialize":"","finalize":"","x":120,"y":140,"wires":[["5f8b00c2.a4e16"],["6883651.9b48b9c"],["c5dee0a1.bbb56"],["1b080179.7354bf"],["e1687332.023c9"]]},{"id":"4069043b.187f0c","type":"debug","z":"2526c01.e3cb34","name":"","active":false,"tosidebar":true,"console":false,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":490,"y":160,"wires":[]},{"id":"8dc59b9f.3374d8","type":"debug","z":"2526c01.e3cb34","name":"","active":false,"tosidebar":true,"console":false,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":490,"y":200,"wires":[]},{"id":"d118e8bc.5115a8","type":"debug","z":"2526c01.e3cb34","name":"","active":false,"tosidebar":true,"console":false,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":490,"y":240,"wires":[]},{"id":"538ad41f.5b87ec","type":"debug","z":"2526c01.e3cb34","name":"","active":false,"tosidebar":true,"console":false,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":490,"y":280,"wires":[]},{"id":"1cdd4222.d0150e","type":"function","z":"2526c01.e3cb34","name":"Cmd==02","func":"v = msg.payload.Cmd.value;\nif (v=='02'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":640,"wires":[["f2fa0061.9496d","21b8e978.13e986","ed427256.a3a68","6cda80d0.cd29c"]]},{"id":"f2fa0061.9496d","type":"function","z":"2526c01.e3cb34","name":"02.70","func":"v = msg.payload.DataNo.value;\nif (v=='70'){\n    msg.data=' SoftwareVersion';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":720,"wires":[["6f2429ec.db07b8"]]},{"id":"21b8e978.13e986","type":"function","z":"2526c01.e3cb34","name":"02.90","func":"v = msg.payload.DataNo.value;\nif (v=='90'){\n    msg.data='S pulses';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":760,"wires":[["6f2429ec.db07b8"]]},{"id":"ed427256.a3a68","type":"function","z":"2526c01.e3cb34","name":"02.91","func":"v = msg.payload.DataNo.value;\nif (v=='91'){\n    msg.data='C pulses';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":800,"wires":[["6f2429ec.db07b8"]]},{"id":"6795a1fd.fc15b","type":"function","z":"2526c01.e3cb34","name":"Respose","func":"cmd = msg.payload.Cmd.value;\ndatano = msg.payload.DataNo.value;\nswitch (cmd) {\n    case '02': //Command\n        switch (datano) {\n            case '70': // Data No.\n                msg.payload=' SoftwareVersion';\n                break;\n            case '90': // Data No.\n                msg.payload='S pulses';\n                break;\n            case '91': // Data No.\n                msg.payload='C pulses';\n                break;                \n        }\n}\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","x":80,"y":60,"wires":[[]]},{"id":"6cda80d0.cd29c","type":"function","z":"2526c01.e3cb34","name":"02.00","func":"v = msg.payload.DataNo.value;\nif (v=='00'){\n    msg.data='00FF';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":680,"wires":[["6f2429ec.db07b8"]]},{"id":"af9600df.f2a21","type":"function","z":"2526c01.e3cb34","name":"Cmd==35","func":"v = msg.payload.Cmd.value;\nif (v=='35'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":1540,"wires":[["281bc662.df17ca","34cf803.57ec48"]]},{"id":"281bc662.df17ca","type":"function","z":"2526c01.e3cb34","name":"35.0x","func":"n = msg.payload.DataNo.value;\nv = parseInt(n, 16);\n\nif (v>=0x00 && v<=0x0e){\n    msg.data='0001' + '0'.repeat(8) + msg.payload.Cmd.value + n ;\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":1580,"wires":[["6f2429ec.db07b8"]]},{"id":"9cd53aea.5d9bb8","type":"function","z":"2526c01.e3cb34","name":"Cmd==33","func":"v = msg.payload.Cmd.value;\nif (v=='33'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":1400,"wires":[["4b066309.42055c","f7f17b2f.4fc218"]]},{"id":"4b066309.42055c","type":"function","z":"2526c01.e3cb34","name":"33.1x","func":"v = parseInt(msg.payload.DataNo.value, 16);\nif (v>=0x10 && v<=0x15){\n    msg.data='00FF';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":1440,"wires":[["6f2429ec.db07b8"]]},{"id":"f7f17b2f.4fc218","type":"function","z":"2526c01.e3cb34","name":"33.2x","func":"v = parseInt(msg.payload.DataNo.value, 16);\nif (v>=0x20 && v<=0x25){\n    msg.data='000001F5';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":1480,"wires":[["6f2429ec.db07b8"]]},{"id":"2fd2d0d4.14b59","type":"function","z":"2526c01.e3cb34","name":"Cmd==00","func":"v = msg.payload.Cmd.value;\nif (v=='00'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":440,"wires":[["9bddedc1.86755"]]},{"id":"9bddedc1.86755","type":"function","z":"2526c01.e3cb34","name":"00.12","func":"v = msg.payload.DataNo.value;\nif (v=='12'){\n    msg.data='0004';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":480,"wires":[["6f2429ec.db07b8"]]},{"id":"9ba0bcb5.f5fba","type":"function","z":"2526c01.e3cb34","name":"Cmd==12","func":"v = msg.payload.Cmd.value;\nif (v=='12'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":1300,"wires":[["8636cd5c.a20ce"]]},{"id":"8636cd5c.a20ce","type":"function","z":"2526c01.e3cb34","name":"12.x0","func":"c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = n;\nswitch(v){\n    case '00':\n    case '40':\n    case '60':\n    case '80':\n    case 'C0':\n      msg.data='0000' + c + v;\n      return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":90,"y":1340,"wires":[["6f2429ec.db07b8"]]},{"id":"23f23cd9.9bb824","type":"function","z":"2526c01.e3cb34","name":"Cmd==05","func":"v = msg.payload.Cmd.value;\nif (v=='05'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":920,"wires":[["9d7817ae.002b68"]]},{"id":"9d7817ae.002b68","type":"function","z":"2526c01.e3cb34","name":"05.xx","func":"v = msg.payload.DataNo.value;\nif (v!=='00'){\n    msg.data='01FFF0' + v;\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":960,"wires":[["6f2429ec.db07b8"]]},{"id":"abcc933a.e9f52","type":"function","z":"2526c01.e3cb34","name":"Cmd==06","func":"v = msg.payload.Cmd.value;\nif (v=='06'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":1000,"wires":[["9916f25.03c0f1"]]},{"id":"9916f25.03c0f1","type":"function","z":"2526c01.e3cb34","name":"06.xx","func":"c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nmsg.data='0000' + c + v;\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":1040,"wires":[["6f2429ec.db07b8"]]},{"id":"6df5a619.591488","type":"function","z":"2526c01.e3cb34","name":"Cmd==07","func":"v = msg.payload.Cmd.value;\nif (v=='07'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":1080,"wires":[["d8304869.f451b8"]]},{"id":"d8304869.f451b8","type":"function","z":"2526c01.e3cb34","name":"07.xx","func":"c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nmsg.data='0000' + c + v;\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":1120,"wires":[["6f2429ec.db07b8"]]},{"id":"8a689913.23bcb8","type":"function","z":"2526c01.e3cb34","name":"Cmd==08","func":"v = msg.payload.Cmd.value;\nif (v=='08'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":1160,"wires":[["cc1c41f2.c4eb3"]]},{"id":"cc1c41f2.c4eb3","type":"function","z":"2526c01.e3cb34","name":"08.xx","func":"c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nif (v!=='00'){\n    msg.data='0'.repeat(8) + c + v;\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":1198,"wires":[["6f2429ec.db07b8"]]},{"id":"203c5272.b6068e","type":"function","z":"2526c01.e3cb34","name":"Cmd==04","func":"v = msg.payload.Cmd.value;\nif (v=='04'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":840,"wires":[["2be221dc.7241ee"]]},{"id":"2be221dc.7241ee","type":"function","z":"2526c01.e3cb34","name":"04.01","func":"c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nif (v=='01'){\n    msg.data='0000';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":878,"wires":[["6f2429ec.db07b8"]]},{"id":"b4ad5305.4c058","type":"function","z":"2526c01.e3cb34","name":"Cmd==01","func":"v = msg.payload.Cmd.value;\nif (v=='01'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":520,"wires":[["b7e37537.935c78","8b0c1b49.8d2048"]]},{"id":"b7e37537.935c78","type":"function","z":"2526c01.e3cb34","name":"01.0x","func":"c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = parseInt(n, 16);\nif (v>=0x00 && v<=0x0e){\n    msg.data='0'.repeat(12) + c + n;\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":90,"y":560,"wires":[["6f2429ec.db07b8"]]},{"id":"8b0c1b49.8d2048","type":"function","z":"2526c01.e3cb34","name":"01.8x","func":"c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = parseInt(n, 16);\nif (v>=0x80 && v<=0x8e){\n    msg.data='0'.repeat(8) + c + n;\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":90,"y":600,"wires":[["6f2429ec.db07b8"]]},{"id":"1ed93eb6.f83181","type":"debug","z":"2526c01.e3cb34","name":"","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":570,"y":720,"wires":[]},{"id":"6f2429ec.db07b8","type":"function","z":"2526c01.e3cb34","name":"Format Response","func":"var sta = Buffer.from(msg.payload.Sta.value);\nvar err = Buffer.from('A');\nvar stx = Buffer.from([flow.get('STX')]);\nvar etx = Buffer.from([flow.get('ETX')]);\nvar data = Buffer.from(msg.data);\nvar content = Buffer.concat([sta, err, data, etx]);\nvar sum = function(prev, cur){return prev+cur;}\nvar checksum = content.reduce(sum) & 0xff;\nchk = Buffer.from(checksum.toString(16).toUpperCase());\nmsg.payload = Buffer.concat([stx, content, chk]);\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","x":370,"y":720,"wires":[["1ed93eb6.f83181","fe23cbaf.cca308"]]},{"id":"34cf803.57ec48","type":"function","z":"2526c01.e3cb34","name":"35.8x","func":"n = msg.payload.DataNo.value;\nv = parseInt(n, 16);\n\nif (v>=0x80 && v<=0x8e){\n    msg.data='0001' + '0'.repeat(4) + msg.payload.Cmd.value + n ;\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":1620,"wires":[["6f2429ec.db07b8"]]},{"id":"7bc8cc12.a67ff4","type":"function","z":"2526c01.e3cb34","name":"Cmd==81","func":"v = msg.payload.Cmd.value;\nif (v=='81'){\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":100,"y":1680,"wires":[["a2369f87.ccd91"]]},{"id":"a2369f87.ccd91","type":"function","z":"2526c01.e3cb34","name":"81.00","func":"v = msg.payload.DataNo.value;\n\nif (v=='00'){\n    msg.data='1EA5';\n    return msg;\n}","outputs":1,"noerr":0,"initialize":"","finalize":"","x":110,"y":1720,"wires":[["6f2429ec.db07b8"]]}]
+[
+    {
+        "id": "2526c01.e3cb34",
+        "type": "tab",
+        "label": "Virtual_MR-J3",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "cc7fae7e.ad2a3",
+        "type": "serial-port",
+        "serialport": "/dev/ttyUSB1",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "even",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "10",
+        "bin": "bin",
+        "out": "interbyte",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "75b88026.ea13d",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 290,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cb737bf3.f58ad8",
+        "type": "serial in",
+        "z": "2526c01.e3cb34",
+        "name": "RS232 Rx",
+        "serial": "cc7fae7e.ad2a3",
+        "x": 100,
+        "y": 260,
+        "wires": [
+            [
+                "75b88026.ea13d",
+                "7364fe42.159b7"
+            ]
+        ]
+    },
+    {
+        "id": "8d0f4233.7ed23",
+        "type": "serial out",
+        "z": "2526c01.e3cb34",
+        "name": "RS232 Tx",
+        "serial": "cc7fae7e.ad2a3",
+        "x": 500,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "fe23cbaf.cca308",
+        "type": "delay",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 350,
+        "y": 860,
+        "wires": [
+            [
+                "8d0f4233.7ed23"
+            ]
+        ]
+    },
+    {
+        "id": "94f0a46d.c8da28",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 490,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5f8b00c2.a4e16",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "M:Data Req",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "SOH",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Sta",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Cmd",
+                "offset": 2,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "DataNo",
+                "offset": 5,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 8,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "object",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "94f0a46d.c8da28",
+                "1cdd4222.d0150e",
+                "af9600df.f2a21",
+                "9cd53aea.5d9bb8",
+                "2fd2d0d4.14b59",
+                "9ba0bcb5.f5fba",
+                "23f23cd9.9bb824",
+                "abcc933a.e9f52",
+                "6df5a619.591488",
+                "8a689913.23bcb8",
+                "203c5272.b6068e",
+                "b4ad5305.4c058",
+                "7bc8cc12.a67ff4"
+            ]
+        ]
+    },
+    {
+        "id": "7364fe42.159b7",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "SOH|STX",
+        "func": "if (msg.payload[0]==flow.get('SOH')){\n    return [msg, null];\n}else if (msg.payload[0]==flow.get('STX')){\n    return [null, msg];\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "666dfdf4.3ad5f4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d42a45cb.34c828",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Global Defines",
+        "func": "\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\nflow.set(\"SOH\",0x1);\nflow.set(\"STX\",0x2);\nflow.set(\"ETX\",0x3);\nflow.set(\"EOT\",0x4);",
+        "finalize": "",
+        "x": 100,
+        "y": 20,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6883651.9b48b9c",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "M:Data4",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "SOH",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "STA",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Cmd",
+                "offset": 2,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "DataNo",
+                "offset": 5,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Data",
+                "offset": 10,
+                "length": 4,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 8,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 300,
+        "y": 160,
+        "wires": [
+            [
+                "4069043b.187f0c"
+            ]
+        ]
+    },
+    {
+        "id": "c5dee0a1.bbb56",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "M:Data8",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "SOH",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "STA",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Cmd",
+                "offset": 2,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "DataNo",
+                "offset": 5,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Data",
+                "offset": 10,
+                "length": 8,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 8,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "8dc59b9f.3374d8"
+            ]
+        ]
+    },
+    {
+        "id": "1b080179.7354bf",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "M:Data12",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "SOH",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "STA",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Cmd",
+                "offset": 2,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "DataNo",
+                "offset": 5,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Data",
+                "offset": 10,
+                "length": 12,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 8,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 300,
+        "y": 240,
+        "wires": [
+            [
+                "d118e8bc.5115a8"
+            ]
+        ]
+    },
+    {
+        "id": "e1687332.023c9",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "M:Data16",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "SOH",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "STA",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Cmd",
+                "offset": 2,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "DataNo",
+                "offset": 5,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Data",
+                "offset": 10,
+                "length": 16,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 8,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "538ad41f.5b87ec"
+            ]
+        ]
+    },
+    {
+        "id": "666dfdf4.3ad5f4",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "0|4|8|12|16",
+        "func": "data=msg.payload.slice(7,-3);\n\nif (data.length==0){\n    return [msg, null, null, null,null];\n}else if (data.length==4){\n    return [null, msg, null, null, null];\n}else if (data.length==8){\n    return [null, null, msg, null, null];\n}else if (data.length==12){\n    return [null, null, null, msg, null];\n}else if (data.length==16){\n    return [null, null, null, null, msg];\n}",
+        "outputs": 5,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "5f8b00c2.a4e16"
+            ],
+            [
+                "6883651.9b48b9c"
+            ],
+            [
+                "c5dee0a1.bbb56"
+            ],
+            [
+                "1b080179.7354bf"
+            ],
+            [
+                "e1687332.023c9"
+            ]
+        ]
+    },
+    {
+        "id": "4069043b.187f0c",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 490,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "8dc59b9f.3374d8",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 490,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d118e8bc.5115a8",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 490,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "538ad41f.5b87ec",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 490,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "1cdd4222.d0150e",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==02",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='02'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 640,
+        "wires": [
+            [
+                "f2fa0061.9496d",
+                "21b8e978.13e986",
+                "ed427256.a3a68",
+                "6cda80d0.cd29c"
+            ]
+        ]
+    },
+    {
+        "id": "f2fa0061.9496d",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "02.70",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='70'){\n    msg.data=' SoftwareVersion';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 720,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "21b8e978.13e986",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "02.90",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='90'){\n    msg.data='S pulses';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 760,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "ed427256.a3a68",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "02.91",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='91'){\n    msg.data='C pulses';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 800,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "6795a1fd.fc15b",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Respose",
+        "func": "cmd = msg.payload.Cmd.value;\ndatano = msg.payload.DataNo.value;\nswitch (cmd) {\n    case '02': //Command\n        switch (datano) {\n            case '70': // Data No.\n                msg.payload=' SoftwareVersion';\n                break;\n            case '90': // Data No.\n                msg.payload='S pulses';\n                break;\n            case '91': // Data No.\n                msg.payload='C pulses';\n                break;                \n        }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 80,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6cda80d0.cd29c",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "02.00",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='00'){\n    msg.data='00FF';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "af9600df.f2a21",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==35",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='35'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 1540,
+        "wires": [
+            [
+                "281bc662.df17ca",
+                "34cf803.57ec48"
+            ]
+        ]
+    },
+    {
+        "id": "281bc662.df17ca",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "35.0x",
+        "func": "n = msg.payload.DataNo.value;\nv = parseInt(n, 16);\n\nif (v>=0x00 && v<=0x0e){\n    msg.data='0001' + '0'.repeat(8) + msg.payload.Cmd.value + n ;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 1580,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "9cd53aea.5d9bb8",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==33",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='33'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 1400,
+        "wires": [
+            [
+                "4b066309.42055c",
+                "f7f17b2f.4fc218"
+            ]
+        ]
+    },
+    {
+        "id": "4b066309.42055c",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "33.1x",
+        "func": "v = parseInt(msg.payload.DataNo.value, 16);\nif (v>=0x10 && v<=0x15){\n    msg.data='00FF';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 1440,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "f7f17b2f.4fc218",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "33.2x",
+        "func": "v = parseInt(msg.payload.DataNo.value, 16);\nif (v>=0x20 && v<=0x25){\n    msg.data='000001F5';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 1480,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "2fd2d0d4.14b59",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==00",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='00'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 440,
+        "wires": [
+            [
+                "9bddedc1.86755"
+            ]
+        ]
+    },
+    {
+        "id": "9bddedc1.86755",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "00.12",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='12'){\n    msg.data='0004';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 480,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "9ba0bcb5.f5fba",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==12",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='12'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 1300,
+        "wires": [
+            [
+                "8636cd5c.a20ce"
+            ]
+        ]
+    },
+    {
+        "id": "8636cd5c.a20ce",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "12.x0",
+        "func": "c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = n;\nswitch(v){\n    case '00':\n    case '40':\n    case '60':\n    case '80':\n    case 'C0':\n      msg.data='0000' + c + v;\n      return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 90,
+        "y": 1340,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "23f23cd9.9bb824",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==05",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='05'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 920,
+        "wires": [
+            [
+                "9d7817ae.002b68"
+            ]
+        ]
+    },
+    {
+        "id": "9d7817ae.002b68",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "05.xx",
+        "func": "v = msg.payload.DataNo.value;\nif (v!=='00'){\n    msg.data='01FFF0' + v;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 960,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "abcc933a.e9f52",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==06",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='06'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 1000,
+        "wires": [
+            [
+                "9916f25.03c0f1"
+            ]
+        ]
+    },
+    {
+        "id": "9916f25.03c0f1",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "06.xx",
+        "func": "c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nmsg.data='0000' + c + v;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 1040,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "6df5a619.591488",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==07",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='07'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 1080,
+        "wires": [
+            [
+                "d8304869.f451b8"
+            ]
+        ]
+    },
+    {
+        "id": "d8304869.f451b8",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "07.xx",
+        "func": "c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nmsg.data='0000' + c + v;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 1120,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "8a689913.23bcb8",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==08",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='08'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 1160,
+        "wires": [
+            [
+                "cc1c41f2.c4eb3"
+            ]
+        ]
+    },
+    {
+        "id": "cc1c41f2.c4eb3",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "08.xx",
+        "func": "c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nif (v!=='00'){\n    msg.data='0'.repeat(8) + c + v;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 1198,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "203c5272.b6068e",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==04",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='04'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 840,
+        "wires": [
+            [
+                "2be221dc.7241ee"
+            ]
+        ]
+    },
+    {
+        "id": "2be221dc.7241ee",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "04.01",
+        "func": "c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nif (v=='01'){\n    msg.data='0000';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 878,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "b4ad5305.4c058",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==01",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='01'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 520,
+        "wires": [
+            [
+                "b7e37537.935c78",
+                "8b0c1b49.8d2048"
+            ]
+        ]
+    },
+    {
+        "id": "b7e37537.935c78",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "01.0x",
+        "func": "c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = parseInt(n, 16);\nif (v>=0x00 && v<=0x0e){\n    msg.data='0'.repeat(12) + c + n;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 90,
+        "y": 560,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "8b0c1b49.8d2048",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "01.8x",
+        "func": "c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = parseInt(n, 16);\nif (v>=0x80 && v<=0x8e){\n    msg.data='0'.repeat(8) + c + n;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 90,
+        "y": 600,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "1ed93eb6.f83181",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "6f2429ec.db07b8",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Format Response",
+        "func": "var sta = Buffer.from(msg.payload.Sta.value);\nvar err = Buffer.from('A');\nvar stx = Buffer.from([flow.get('STX')]);\nvar etx = Buffer.from([flow.get('ETX')]);\nvar data = Buffer.from(msg.data);\nvar content = Buffer.concat([sta, err, data, etx]);\nvar sum = function(prev, cur){return prev+cur;}\nvar checksum = content.reduce(sum) & 0xff;\nchk = Buffer.from(checksum.toString(16).toUpperCase());\nmsg.payload = Buffer.concat([stx, content, chk]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 720,
+        "wires": [
+            [
+                "1ed93eb6.f83181",
+                "fe23cbaf.cca308"
+            ]
+        ]
+    },
+    {
+        "id": "34cf803.57ec48",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "35.8x",
+        "func": "n = msg.payload.DataNo.value;\nv = parseInt(n, 16);\n\nif (v>=0x80 && v<=0x8e){\n    msg.data='0001' + '0'.repeat(4) + msg.payload.Cmd.value + n ;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 1620,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "7bc8cc12.a67ff4",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==81",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='81'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 100,
+        "y": 1680,
+        "wires": [
+            [
+                "a2369f87.ccd91"
+            ]
+        ]
+    },
+    {
+        "id": "a2369f87.ccd91",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "81.00",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v=='00'){\n    msg.data='1EA5';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 110,
+        "y": 1720,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    }
+]
