@@ -1,0 +1,12 @@
+{
+    "name": "Virtual_MR-J3",
+    "description": "A virtual device that emulates responses to the Mitsubishi Servo Amplifier commands",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "flows.json",
+            "credentialsFile": "flows_cred.json"
+        }
+    }
+}
