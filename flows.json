@@ -844,22 +844,6 @@
         ]
     },
     {
-        "id": "6795a1fd.fc15b",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "Respose",
-        "func": "cmd = msg.payload.Cmd.value;\ndatano = msg.payload.DataNo.value;\nswitch (cmd) {\n    case '02': //Command\n        switch (datano) {\n            case '70': // Data No.\n                msg.payload=' SoftwareVersion';\n                break;\n            case '90': // Data No.\n                msg.payload='S pulses';\n                break;\n            case '91': // Data No.\n                msg.payload='C pulses';\n                break;                \n        }\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 80,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "6cda80d0.cd29c",
         "type": "function",
         "z": "2526c01.e3cb34",
