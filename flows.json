@@ -228,7 +228,7 @@
         "id": "75b88026.ea13d",
         "type": "debug",
         "z": "2526c01.e3cb34",
-        "name": "",
+        "name": "RS232 Rx",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -294,7 +294,7 @@
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -553,7 +553,9 @@
             [
                 "4069043b.187f0c",
                 "d9e2a9af.599588",
-                "bd9cfd8f.53102"
+                "bd9cfd8f.53102",
+                "59386d44.566e14",
+                "d7a4ad2.42aab5"
             ]
         ]
     },
@@ -879,13 +881,13 @@
         "id": "666dfdf4.3ad5f4",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "0|4|8|12|16",
+        "name": "M. 0|4|8|12|16",
         "func": "data=msg.payload.slice(7,-3);\n\nif (data.length==0){\n    return [msg, null, null, null,null];\n}else if (data.length==4){\n    return [null, msg, null, null, null];\n}else if (data.length==8){\n    return [null, null, msg, null, null];\n}else if (data.length==12){\n    return [null, null, null, msg, null];\n}else if (data.length==16){\n    return [null, null, null, null, msg];\n}",
         "outputs": 5,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 120,
+        "x": 130,
         "y": 140,
         "wires": [
             [
@@ -910,7 +912,7 @@
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -1175,7 +1177,8 @@
         "wires": [
             [
                 "9bddedc1.86755",
-                "c7bfaa5f.ae04d8"
+                "c7bfaa5f.ae04d8",
+                "595a019d.38c88"
             ]
         ]
     },
@@ -1473,8 +1476,8 @@
         "id": "1ed93eb6.f83181",
         "type": "debug",
         "z": "2526c01.e3cb34",
-        "name": "",
-        "active": true,
+        "name": "Format Response",
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1482,7 +1485,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
+        "x": 590,
         "y": 720,
         "wires": []
     },
@@ -1501,7 +1504,8 @@
         "wires": [
             [
                 "1ed93eb6.f83181",
-                "fe23cbaf.cca308"
+                "fe23cbaf.cca308",
+                "7228c952.4e3d08"
             ]
         ]
     },
@@ -1564,7 +1568,7 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "02.20",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='20'){\n    msg.data='F'.repeat(4);\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='20'){\n    msg.data='00FF';\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1672,7 +1676,7 @@
         "id": "c0040bae.e9a918",
         "type": "debug",
         "z": "2526c01.e3cb34",
-        "name": "",
+        "name": "In Frame",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1681,7 +1685,7 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 870,
+        "x": 860,
         "y": 40,
         "wires": []
     },
@@ -1719,6 +1723,607 @@
         "wires": [
             [
                 "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "be9ff98.9c5d708",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "S. Data4",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Sta",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Err",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Data",
+                "offset": 3,
+                "length": 4,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 8,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "object",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 840,
+        "y": 420,
+        "wires": [
+            [
+                "5d980abe.eabde4"
+            ]
+        ]
+    },
+    {
+        "id": "7228c952.4e3d08",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "S. 0|4|8|12|16",
+        "func": "data=msg.payload.slice(3,-3);\n\nif (data.length==0){\n    return [msg, null, null, null,null];\n}else if (data.length==4){\n    return [null, msg, null, null, null];\n}else if (data.length==8){\n    return [null, null, msg, null, null];\n}else if (data.length==12){\n    return [null, null, null, msg, null];\n}else if (data.length==16){\n    return [null, null, null, null, msg];\n}",
+        "outputs": 5,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 640,
+        "y": 460,
+        "wires": [
+            [
+                "92d0db52.25bfd8"
+            ],
+            [
+                "be9ff98.9c5d708"
+            ],
+            [
+                "c82436d9.fccca8"
+            ],
+            [
+                "321ce2f8.c34b7e"
+            ],
+            [
+                "9d6f5cf9.c7dd9"
+            ]
+        ]
+    },
+    {
+        "id": "c82436d9.fccca8",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "S. Data8",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Sta",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Err",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Data",
+                "offset": 3,
+                "length": 8,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 11,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 12,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "object",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 840,
+        "y": 460,
+        "wires": [
+            [
+                "5d980abe.eabde4"
+            ]
+        ]
+    },
+    {
+        "id": "321ce2f8.c34b7e",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "S. Data12",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Sta",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Err",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Data",
+                "offset": 3,
+                "length": 12,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 15,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 16,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "object",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 840,
+        "y": 500,
+        "wires": [
+            [
+                "5d980abe.eabde4"
+            ]
+        ]
+    },
+    {
+        "id": "9d6f5cf9.c7dd9",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "S. Data16",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Sta",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Err",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Data",
+                "offset": 3,
+                "length": 16,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 19,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 20,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "object",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 840,
+        "y": 540,
+        "wires": [
+            [
+                "5d980abe.eabde4"
+            ]
+        ]
+    },
+    {
+        "id": "92d0db52.25bfd8",
+        "type": "buffer-parser",
+        "z": "2526c01.e3cb34",
+        "name": "S. Data0",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "STX",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Sta",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Err",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "byte",
+                "name": "ETX",
+                "offset": 3,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "ascii",
+                "name": "Chk",
+                "offset": 4,
+                "length": 2,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "object",
+        "resultTypeType": "output",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 840,
+        "y": 380,
+        "wires": [
+            [
+                "f5613a1d.743a78"
+            ]
+        ]
+    },
+    {
+        "id": "5d980abe.eabde4",
+        "type": "template",
+        "z": "2526c01.e3cb34",
+        "name": "Err w/ data",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.Err.name}}={{payload.Err.value}}\n{{payload.Data.name}}={{payload.Data.value}}",
+        "output": "str",
+        "x": 1030,
+        "y": 420,
+        "wires": [
+            [
+                "bdf28f1c.6b562"
+            ]
+        ]
+    },
+    {
+        "id": "f5613a1d.743a78",
+        "type": "template",
+        "z": "2526c01.e3cb34",
+        "name": "Err w/o data",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{{payload.Err.name}}={{payload.Err.value}}",
+        "output": "str",
+        "x": 1030,
+        "y": 380,
+        "wires": [
+            [
+                "bdf28f1c.6b562"
+            ]
+        ]
+    },
+    {
+        "id": "bdf28f1c.6b562",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "Out Frame",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "595a019d.38c88",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "00.28",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='28'){\n    msg.data='0000';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 390,
+        "y": 540,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "59386d44.566e14",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==8B",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='8B'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 360,
+        "y": 1160,
+        "wires": [
+            [
+                "696b778a.1fd128"
+            ]
+        ]
+    },
+    {
+        "id": "696b778a.1fd128",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "8B.00",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v=='00'){\n    msg.data='';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 1200,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "10d4a47a.3363fc",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "No Data",
+        "func": "v = msg.payload.DataNo.value;\n\nmsg.data='';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 600,
+        "y": 1100,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "d7a4ad2.42aab5",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==90",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='8B'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 360,
+        "y": 1240,
+        "wires": [
+            [
+                "10d4a47a.3363fc"
             ]
         ]
     }
