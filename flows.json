@@ -26,11 +26,210 @@
         "responsetimeout": "10000"
     },
     {
+        "id": "1d1d3768.b73049",
+        "type": "serial-port",
+        "serialport": "/dev/ttySIM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "even",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "625872f.40b1e8c",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "58c2aa06.ef46e4",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "58c2aa06.ef46e4",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e9b00ce.4defdf",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "237da972.5d69a6",
+        "type": "ui_group",
+        "name": "ui-table with commands",
+        "tab": "379a501f.53b59",
+        "order": 1,
+        "disp": true,
+        "width": "17",
+        "collapse": false
+    },
+    {
+        "id": "c91332c0.50c11",
+        "type": "ui_group",
+        "name": "commands",
+        "tab": "379a501f.53b59",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "379a501f.53b59",
+        "type": "ui_tab",
+        "name": "ui-table command",
+        "icon": "fa-table",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ff9fdb9a.7da098",
+        "type": "ui_group",
+        "name": "TEST",
+        "tab": "7dcc246f.ee661c",
+        "order": 1,
+        "disp": false,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "7dcc246f.ee661c",
+        "type": "ui_tab",
+        "name": "TEST",
+        "icon": "dashboard",
+        "order": 12,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "51ce6aa1.620754",
+        "type": "ui_group",
+        "name": "ui_control",
+        "tab": "3b08fac0.8f06b6",
+        "order": 1,
+        "disp": true,
+        "width": "22",
+        "collapse": false
+    },
+    {
+        "id": "3b08fac0.8f06b6",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "track_changes",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
         "id": "75b88026.ea13d",
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -73,7 +272,7 @@
         "z": "2526c01.e3cb34",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1",
+        "timeout": "10",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -95,7 +294,7 @@
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -211,7 +410,8 @@
                 "8a689913.23bcb8",
                 "203c5272.b6068e",
                 "b4ad5305.4c058",
-                "7bc8cc12.a67ff4"
+                "7bc8cc12.a67ff4",
+                "26b78898.974a58"
             ]
         ]
     },
@@ -271,7 +471,7 @@
             },
             {
                 "type": "ascii",
-                "name": "STA",
+                "name": "Sta",
                 "offset": 1,
                 "length": 1,
                 "offsetbit": 0,
@@ -308,7 +508,7 @@
             {
                 "type": "ascii",
                 "name": "Data",
-                "offset": 10,
+                "offset": 7,
                 "length": 4,
                 "offsetbit": 0,
                 "scale": "1",
@@ -317,7 +517,7 @@
             {
                 "type": "byte",
                 "name": "ETX",
-                "offset": 7,
+                "offset": 11,
                 "length": 1,
                 "offsetbit": 0,
                 "scale": "1",
@@ -326,7 +526,7 @@
             {
                 "type": "ascii",
                 "name": "Chk",
-                "offset": 8,
+                "offset": 12,
                 "length": 2,
                 "offsetbit": 0,
                 "scale": "1",
@@ -341,7 +541,7 @@
         "swap3Type": "swap",
         "msgProperty": "payload",
         "msgPropertyType": "str",
-        "resultType": "keyvalue",
+        "resultType": "object",
         "resultTypeType": "output",
         "multipleResult": false,
         "fanOutMultipleResult": false,
@@ -351,7 +551,9 @@
         "y": 160,
         "wires": [
             [
-                "4069043b.187f0c"
+                "4069043b.187f0c",
+                "d9e2a9af.599588",
+                "bd9cfd8f.53102"
             ]
         ]
     },
@@ -376,7 +578,7 @@
             },
             {
                 "type": "ascii",
-                "name": "STA",
+                "name": "Sta",
                 "offset": 1,
                 "length": 1,
                 "offsetbit": 0,
@@ -413,7 +615,7 @@
             {
                 "type": "ascii",
                 "name": "Data",
-                "offset": 10,
+                "offset": 7,
                 "length": 8,
                 "offsetbit": 0,
                 "scale": "1",
@@ -422,7 +624,7 @@
             {
                 "type": "byte",
                 "name": "ETX",
-                "offset": 7,
+                "offset": 15,
                 "length": 1,
                 "offsetbit": 0,
                 "scale": "1",
@@ -431,7 +633,7 @@
             {
                 "type": "ascii",
                 "name": "Chk",
-                "offset": 8,
+                "offset": 16,
                 "length": 2,
                 "offsetbit": 0,
                 "scale": "1",
@@ -456,7 +658,8 @@
         "y": 200,
         "wires": [
             [
-                "8dc59b9f.3374d8"
+                "8dc59b9f.3374d8",
+                "bd9cfd8f.53102"
             ]
         ]
     },
@@ -481,7 +684,7 @@
             },
             {
                 "type": "ascii",
-                "name": "STA",
+                "name": "Sta",
                 "offset": 1,
                 "length": 1,
                 "offsetbit": 0,
@@ -561,7 +764,8 @@
         "y": 240,
         "wires": [
             [
-                "d118e8bc.5115a8"
+                "d118e8bc.5115a8",
+                "bd9cfd8f.53102"
             ]
         ]
     },
@@ -586,7 +790,7 @@
             },
             {
                 "type": "ascii",
-                "name": "STA",
+                "name": "Sta",
                 "offset": 1,
                 "length": 1,
                 "offsetbit": 0,
@@ -623,7 +827,7 @@
             {
                 "type": "ascii",
                 "name": "Data",
-                "offset": 10,
+                "offset": 7,
                 "length": 16,
                 "offsetbit": 0,
                 "scale": "1",
@@ -632,7 +836,7 @@
             {
                 "type": "byte",
                 "name": "ETX",
-                "offset": 7,
+                "offset": 24,
                 "length": 1,
                 "offsetbit": 0,
                 "scale": "1",
@@ -641,7 +845,7 @@
             {
                 "type": "ascii",
                 "name": "Chk",
-                "offset": 8,
+                "offset": 25,
                 "length": 2,
                 "offsetbit": 0,
                 "scale": "1",
@@ -666,7 +870,8 @@
         "y": 280,
         "wires": [
             [
-                "538ad41f.5b87ec"
+                "538ad41f.5b87ec",
+                "bd9cfd8f.53102"
             ]
         ]
     },
@@ -705,7 +910,7 @@
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -785,7 +990,9 @@
                 "f2fa0061.9496d",
                 "21b8e978.13e986",
                 "ed427256.a3a68",
-                "6cda80d0.cd29c"
+                "6cda80d0.cd29c",
+                "21f1277c.210338",
+                "6230229e.78482c"
             ]
         ]
     },
@@ -794,7 +1001,7 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "02.70",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='70'){\n    msg.data=' SoftwareVersion';\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='70'){\n    msg.data=' '+'0'.repeat(14)+'1';\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -967,7 +1174,8 @@
         "y": 440,
         "wires": [
             [
-                "9bddedc1.86755"
+                "9bddedc1.86755",
+                "c7bfaa5f.ae04d8"
             ]
         ]
     },
@@ -1183,7 +1391,8 @@
         "y": 840,
         "wires": [
             [
-                "2be221dc.7241ee"
+                "2be221dc.7241ee",
+                "3af2b41a.fcb21c"
             ]
         ]
     },
@@ -1265,7 +1474,7 @@
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1344,6 +1553,169 @@
         "finalize": "",
         "x": 110,
         "y": 1720,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "21f1277c.210338",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "02.20",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='20'){\n    msg.data='F'.repeat(4);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 600,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "c7bfaa5f.ae04d8",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "00.01",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='01'){\n    msg.data='0001';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "d9e2a9af.599588",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==85",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='85'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 360,
+        "y": 1080,
+        "wires": [
+            [
+                "efbebc2b.1c26b"
+            ]
+        ]
+    },
+    {
+        "id": "efbebc2b.1c26b",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "85.00",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v=='00'){\n    msg.data='';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 1120,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "3af2b41a.fcb21c",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "04.02",
+        "func": "c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nif (v=='02'){\n    msg.data='0000';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 530,
+        "y": 960,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "26b78898.974a58",
+        "type": "template",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd w/o data",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "[{{payload.Cmd.value.0}}][{{payload.Cmd.value.1}}].[{{payload.DataNo.value.0}}][{{payload.DataNo.value.1}}]",
+        "output": "str",
+        "x": 680,
+        "y": 40,
+        "wires": [
+            [
+                "c0040bae.e9a918"
+            ]
+        ]
+    },
+    {
+        "id": "c0040bae.e9a918",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 870,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "bd9cfd8f.53102",
+        "type": "template",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd w/ data",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "[{{payload.Cmd.value.0}}][{{payload.Cmd.value.1}}].[{{payload.DataNo.value.0}}][{{payload.DataNo.value.1}}]\n{{payload.Data.name}}={{payload.Data.value}}",
+        "output": "str",
+        "x": 670,
+        "y": 80,
+        "wires": [
+            [
+                "c0040bae.e9a918"
+            ]
+        ]
+    },
+    {
+        "id": "6230229e.78482c",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "02.60",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='60'){\n    msg.data='00FF';\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 530,
+        "y": 620,
         "wires": [
             [
                 "6f2429ec.db07b8"
