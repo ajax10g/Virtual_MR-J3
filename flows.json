@@ -262,8 +262,8 @@
         "z": "2526c01.e3cb34",
         "name": "RS232 Tx",
         "serial": "cc7fae7e.ad2a3",
-        "x": 960,
-        "y": 820,
+        "x": 1400,
+        "y": 880,
         "wires": []
     },
     {
@@ -281,8 +281,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 810,
-        "y": 820,
+        "x": 1250,
+        "y": 880,
         "wires": [
             [
                 "8d0f4233.7ed23"
@@ -445,7 +445,7 @@
         "func": "\n",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\nflow.set(\"SOH\",0x1);\nflow.set(\"STX\",0x2);\nflow.set(\"ETX\",0x3);\nflow.set(\"EOT\",0x4);",
+        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\nflow.set(\"SOH\",0x1);\nflow.set(\"STX\",0x2);\nflow.set(\"ETX\",0x3);\nflow.set(\"EOT\",0x4);\n\n/*** [][] of unique members ***/\nflow.set('84.0x', new Array(4).fill(null).map(()=> (new Array(13).fill(null).map(()=> ('0'.repeat(8))))));\n\nflow.set(\"85.0x\", ['0000','0000','0000','0000']);",
         "finalize": "",
         "x": 100,
         "y": 20,
@@ -653,7 +653,7 @@
         "swap3Type": "swap",
         "msgProperty": "payload",
         "msgPropertyType": "str",
-        "resultType": "keyvalue",
+        "resultType": "object",
         "resultTypeType": "output",
         "multipleResult": false,
         "fanOutMultipleResult": false,
@@ -664,7 +664,8 @@
         "wires": [
             [
                 "8dc59b9f.3374d8",
-                "bd9cfd8f.53102"
+                "bd9cfd8f.53102",
+                "9a7d622d.2ece1"
             ]
         ]
     },
@@ -759,7 +760,7 @@
         "swap3Type": "swap",
         "msgProperty": "payload",
         "msgPropertyType": "str",
-        "resultType": "keyvalue",
+        "resultType": "object",
         "resultTypeType": "output",
         "multipleResult": false,
         "fanOutMultipleResult": false,
@@ -865,7 +866,7 @@
         "swap3Type": "swap",
         "msgProperty": "payload",
         "msgPropertyType": "str",
-        "resultType": "keyvalue",
+        "resultType": "object",
         "resultTypeType": "output",
         "multipleResult": false,
         "fanOutMultipleResult": false,
@@ -931,7 +932,7 @@
         "id": "8dc59b9f.3374d8",
         "type": "debug",
         "z": "2526c01.e3cb34",
-        "name": "",
+        "name": "M. Data8",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -940,7 +941,7 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 490,
+        "x": 480,
         "y": 200,
         "wires": []
     },
@@ -992,31 +993,7 @@
         "y": 640,
         "wires": [
             [
-                "f2fa0061.9496d",
-                "21b8e978.13e986",
-                "ed427256.a3a68",
-                "6cda80d0.cd29c",
-                "21f1277c.210338",
-                "6230229e.78482c",
-                "d6f35762.48d368"
-            ]
-        ]
-    },
-    {
-        "id": "f2fa0061.9496d",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "02.70",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='70'){\n    msg.data=' '+'0'.repeat(13)+'A0';\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 110,
-        "y": 720,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
+                "21b8e978.13e986"
             ]
         ]
     },
@@ -1024,44 +1001,8 @@
         "id": "21b8e978.13e986",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "02.90",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='90'){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 110,
-        "y": 760,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
-            ]
-        ]
-    },
-    {
-        "id": "ed427256.a3a68",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "02.91",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='91'){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 110,
-        "y": 800,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
-            ]
-        ]
-    },
-    {
-        "id": "6cda80d0.cd29c",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "02.00",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='00'){\n    msg.data='00FF';\n    return msg;\n}",
+        "name": "02.xx",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v=='00'){\n    msg.data='00FF';\n    return msg;\n}\n\nif (v.match(/1[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v.match(/2[0-9]/)){\n    msg.data='0'.repeat(16);\n    return msg;\n}\n\nif (v.match(/6[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v=='70'){\n    msg.data=' '+'0'.repeat(13)+'A0';\n    return msg;\n}\n\nif (v.match(/9[0-1]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v.match(/C[0]/)){\n    //msg.data='0'.repeat(4);\n    msg.data='0'.repeat(4);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1084,12 +1025,11 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 100,
-        "y": 1540,
+        "x": 500,
+        "y": 540,
         "wires": [
             [
-                "281bc662.df17ca",
-                "34cf803.57ec48"
+                "281bc662.df17ca"
             ]
         ]
     },
@@ -1097,14 +1037,14 @@
         "id": "281bc662.df17ca",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "35.0x",
-        "func": "n = msg.payload.DataNo.value;\nv = parseInt(n, 16);\n\nif (v>=0x00 && v<=0x0e){\n    msg.data='0001' + '0'.repeat(8) + msg.payload.Cmd.value + n ;\n    return msg;\n}",
+        "name": "35.xx",
+        "func": "v = msg.payload.DataNo.value;\nif (v.match(/0[0-9A-E]/)){\n    msg.data='0001' + '0'.repeat(12);\n    return msg;\n}\n\nif (v.match(/8[0-9A-E]/)){\n    msg.data='0001' + '0'.repeat(8);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 110,
-        "y": 1580,
+        "x": 510,
+        "y": 580,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1121,12 +1061,11 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 100,
-        "y": 1400,
+        "x": 500,
+        "y": 440,
         "wires": [
             [
-                "4b066309.42055c",
-                "f7f17b2f.4fc218"
+                "4b066309.42055c"
             ]
         ]
     },
@@ -1134,32 +1073,14 @@
         "id": "4b066309.42055c",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "33.1x",
-        "func": "v = parseInt(msg.payload.DataNo.value, 16);\nif (v>=0x10 && v<=0x15){\n    msg.data='00FF';\n    return msg;\n}",
+        "name": "33.xx",
+        "func": "v = msg.payload.DataNo.value;\nif (v.match(/1[0-5]/)){\n    msg.data='00FF';\n    return msg;\n}\n\nif (v.match(/2[0-5]/)){\n    msg.data='0'.repeat(4) + '01F5';\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 110,
-        "y": 1440,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
-            ]
-        ]
-    },
-    {
-        "id": "f7f17b2f.4fc218",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "33.2x",
-        "func": "v = parseInt(msg.payload.DataNo.value, 16);\nif (v>=0x20 && v<=0x25){\n    msg.data='000001F5';\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 110,
-        "y": 1480,
+        "x": 510,
+        "y": 480,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1180,27 +1101,7 @@
         "y": 440,
         "wires": [
             [
-                "9bddedc1.86755",
-                "c7bfaa5f.ae04d8",
                 "2970c450.ad69dc"
-            ]
-        ]
-    },
-    {
-        "id": "9bddedc1.86755",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "00.12",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='12'){\n    msg.data='0004';\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 110,
-        "y": 480,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
             ]
         ]
     },
@@ -1214,8 +1115,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 100,
-        "y": 1300,
+        "x": 300,
+        "y": 440,
         "wires": [
             [
                 "8636cd5c.a20ce"
@@ -1227,13 +1128,13 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "12.x0",
-        "func": "c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = n;\nswitch(v){\n    case '00':\n    case '40':\n    case '60':\n    case '80':\n    case 'C0':\n      msg.data='0000' + c + v;\n      return msg;\n}",
+        "func": "//c = msg.payload.Cmd.value;\n//n = msg.payload.DataNo.value;\n//v = n;\n//switch(v){\n//    case '00':\n//    case '40':\n//    case '60':\n//    case '80':\n//    case 'C0':\n//      msg.data='0000' + c + v;\n//      return msg;\n//}\nv = msg.payload.DataNo.value;\nif (v.match(/[0468C]0/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 90,
-        "y": 1340,
+        "x": 290,
+        "y": 480,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1251,7 +1152,7 @@
         "initialize": "",
         "finalize": "",
         "x": 100,
-        "y": 920,
+        "y": 840,
         "wires": [
             [
                 "9d7817ae.002b68"
@@ -1263,13 +1164,13 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "05.xx",
-        "func": "v = msg.payload.DataNo.value;\nif (v!=='00'){\n    msg.data='01FFF0' + v;\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\nif (v.match(/0[C]/)) {\n    //msg.data = flow.get('84.0x')[i];\n    var i = parseInt(v, 16);\n    var g = parseInt(flow.get('85.0x')[0], 16);\n    var aa = flow.get('84.0x');\n    //msg.data = aa[g][i];\n    msg.data = '0'.repeate(8);\n    return msg;\n}\n\nif (v!=='00'){\n    msg.data='01FFF0' + v;\n    //msg.data = '0'.repeat(8);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "x": 110,
-        "y": 960,
+        "y": 880,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1287,7 +1188,7 @@
         "initialize": "",
         "finalize": "",
         "x": 100,
-        "y": 1000,
+        "y": 940,
         "wires": [
             [
                 "9916f25.03c0f1"
@@ -1305,7 +1206,7 @@
         "initialize": "",
         "finalize": "",
         "x": 110,
-        "y": 1040,
+        "y": 980,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1323,7 +1224,7 @@
         "initialize": "",
         "finalize": "",
         "x": 100,
-        "y": 1080,
+        "y": 1040,
         "wires": [
             [
                 "d8304869.f451b8"
@@ -1341,7 +1242,7 @@
         "initialize": "",
         "finalize": "",
         "x": 110,
-        "y": 1120,
+        "y": 1080,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1359,7 +1260,7 @@
         "initialize": "",
         "finalize": "",
         "x": 100,
-        "y": 1160,
+        "y": 1140,
         "wires": [
             [
                 "cc1c41f2.c4eb3"
@@ -1377,7 +1278,7 @@
         "initialize": "",
         "finalize": "",
         "x": 110,
-        "y": 1198,
+        "y": 1178,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1395,29 +1296,10 @@
         "initialize": "",
         "finalize": "",
         "x": 100,
-        "y": 840,
+        "y": 740,
         "wires": [
             [
-                "2be221dc.7241ee",
                 "3af2b41a.fcb21c"
-            ]
-        ]
-    },
-    {
-        "id": "2be221dc.7241ee",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "04.01",
-        "func": "c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nif (v=='01'){\n    msg.data='0000';\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 110,
-        "y": 878,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
             ]
         ]
     },
@@ -1432,29 +1314,10 @@
         "initialize": "",
         "finalize": "",
         "x": 100,
-        "y": 520,
+        "y": 540,
         "wires": [
             [
-                "b7e37537.935c78",
                 "8b0c1b49.8d2048"
-            ]
-        ]
-    },
-    {
-        "id": "b7e37537.935c78",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "01.0x",
-        "func": "c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = parseInt(n, 16);\nif (v>=0x00 && v<=0x0e){\n    msg.data='0'.repeat(12) + c + n;\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 90,
-        "y": 560,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
             ]
         ]
     },
@@ -1462,14 +1325,14 @@
         "id": "8b0c1b49.8d2048",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "01.8x",
-        "func": "c = msg.payload.Cmd.value;\nn = msg.payload.DataNo.value;\nv = parseInt(n, 16);\nif (v>=0x80 && v<=0x8e){\n    msg.data='0'.repeat(8) + c + n;\n    return msg;\n}",
+        "name": "01.xx",
+        "func": "//c = msg.payload.Cmd.value;\n//n = msg.payload.DataNo.value;\n//v = parseInt(n, 16);\n//if (v>=0x00 && v<=0x0e){\n//    msg.data='0'.repeat(12) + c + n;\n//    return msg;\n//}\n\n//c = msg.payload.Cmd.value;\n//n = msg.payload.DataNo.value;\n//v = parseInt(n, 16);\n//if (v>=0x80 && v<=0x8e){\n//    msg.data='0'.repeat(8) + c + n;\n//    return msg;\n//}\n\nv = msg.payload.DataNo.value;\nif (v.match(/0[0-9A-E]/)){\n    msg.data='0'.repeat(16);\n    return msg;\n}\n\nif (v.match(/8[0-9A-E]/)){\n    msg.data='0'.repeat(16);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 90,
-        "y": 600,
+        "x": 110,
+        "y": 580,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1489,8 +1352,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 610,
-        "y": 700,
+        "x": 1130,
+        "y": 800,
         "wires": []
     },
     {
@@ -1503,31 +1366,13 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 370,
-        "y": 720,
+        "x": 1130,
+        "y": 840,
         "wires": [
             [
                 "1ed93eb6.f83181",
                 "7228c952.4e3d08",
                 "4e1e16c8.c0b818"
-            ]
-        ]
-    },
-    {
-        "id": "34cf803.57ec48",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "35.8x",
-        "func": "n = msg.payload.DataNo.value;\nv = parseInt(n, 16);\n\nif (v>=0x80 && v<=0x8e){\n    msg.data='0001' + '0'.repeat(4) + msg.payload.Cmd.value + n ;\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 110,
-        "y": 1620,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
             ]
         ]
     },
@@ -1541,8 +1386,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 100,
-        "y": 1680,
+        "x": 700,
+        "y": 440,
         "wires": [
             [
                 "a2369f87.ccd91"
@@ -1559,44 +1404,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 110,
-        "y": 1720,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
-            ]
-        ]
-    },
-    {
-        "id": "21f1277c.210338",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "02.2x",
-        "func": "v = msg.payload.DataNo.value;\nif (v.match(/2[0-9]/)){\n    msg.data='0'.repeat(16);\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 370,
-        "y": 600,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
-            ]
-        ]
-    },
-    {
-        "id": "c7bfaa5f.ae04d8",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "00.01",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='01'){\n    msg.data='0000';\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 370,
-        "y": 1340,
+        "x": 710,
+        "y": 480,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1613,8 +1422,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 360,
-        "y": 1080,
+        "x": 700,
+        "y": 640,
         "wires": [
             [
                 "efbebc2b.1c26b"
@@ -1626,13 +1435,13 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "85.0x",
-        "func": "v = msg.payload.DataNo.value;\n\nif (v.match(/0[0-9]/)){\n    msg.data='';\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\n//var o;\nif (v.match(/0[0-3]/)){\n    msg.data='';\n\n    //o = flow.get('85.0x');\n    //o = {'DataNo':v, 'Data':msg.payload.Data.value};\n    //flow.set('85.0x', o);\n    \n    var i = parseInt(v, 16);\n    var a = flow.get('85.0x');\n    a[i] = msg.payload.Data.value;\n    flow.set('85.0x', a);\n    \n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 370,
-        "y": 1120,
+        "x": 710,
+        "y": 680,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1643,14 +1452,14 @@
         "id": "3af2b41a.fcb21c",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "04.02",
-        "func": "c = msg.payload.Cmd.value;\nv = msg.payload.DataNo.value;\nif (v=='02'){\n    msg.data='0000';\n    return msg;\n}",
+        "name": "04.xx",
+        "func": "v = msg.payload.DataNo.value;\nif (v.match(/0[1]/)){\n    //msg.data='0'.repeat(4);\n    msg.data=flow.get('85.0x')[0];\n    return msg;\n}\n\nif (v.match(/0[2]/)){\n    //msg.data='0002';\n    msg.data = flow.get(\"85.0x\")[1];\n    \n    //var i = parseInt(flow.get(\"85.0x\").DataNo);\n    //msg.data = flow.get(\"85.0x\")['Data'];\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 530,
-        "y": 960,
+        "x": 110,
+        "y": 780,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1709,24 +1518,6 @@
         "wires": [
             [
                 "c0040bae.e9a918"
-            ]
-        ]
-    },
-    {
-        "id": "6230229e.78482c",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "02.6x",
-        "func": "v = msg.payload.DataNo.value;\nif (v.match(/6[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 530,
-        "y": 620,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
             ]
         ]
     },
@@ -1809,8 +1600,8 @@
         "fanOutMultipleResult": false,
         "setTopic": true,
         "outputs": 1,
-        "x": 840,
-        "y": 420,
+        "x": 900,
+        "y": 200,
         "wires": [
             [
                 "5d980abe.eabde4"
@@ -1827,8 +1618,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 640,
-        "y": 460,
+        "x": 700,
+        "y": 240,
         "wires": [
             [
                 "92d0db52.25bfd8"
@@ -1926,8 +1717,8 @@
         "fanOutMultipleResult": false,
         "setTopic": true,
         "outputs": 1,
-        "x": 840,
-        "y": 460,
+        "x": 900,
+        "y": 240,
         "wires": [
             [
                 "5d980abe.eabde4"
@@ -2013,8 +1804,8 @@
         "fanOutMultipleResult": false,
         "setTopic": true,
         "outputs": 1,
-        "x": 840,
-        "y": 500,
+        "x": 900,
+        "y": 280,
         "wires": [
             [
                 "5d980abe.eabde4"
@@ -2100,8 +1891,8 @@
         "fanOutMultipleResult": false,
         "setTopic": true,
         "outputs": 1,
-        "x": 840,
-        "y": 540,
+        "x": 900,
+        "y": 320,
         "wires": [
             [
                 "5d980abe.eabde4"
@@ -2178,8 +1969,8 @@
         "fanOutMultipleResult": false,
         "setTopic": true,
         "outputs": 1,
-        "x": 840,
-        "y": 380,
+        "x": 900,
+        "y": 160,
         "wires": [
             [
                 "f5613a1d.743a78"
@@ -2197,8 +1988,8 @@
         "syntax": "mustache",
         "template": "{{payload.Err.name}}={{payload.Err.value}}\n{{payload.Data.name}}={{payload.Data.value}}",
         "output": "str",
-        "x": 1030,
-        "y": 420,
+        "x": 1090,
+        "y": 200,
         "wires": [
             [
                 "bdf28f1c.6b562"
@@ -2216,8 +2007,8 @@
         "syntax": "mustache",
         "template": "{{payload.Err.name}}={{payload.Err.value}}",
         "output": "str",
-        "x": 1030,
-        "y": 380,
+        "x": 1090,
+        "y": 160,
         "wires": [
             [
                 "bdf28f1c.6b562"
@@ -2237,8 +2028,8 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 1230,
-        "y": 380,
+        "x": 1290,
+        "y": 160,
         "wires": []
     },
     {
@@ -2251,8 +2042,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 360,
-        "y": 1160,
+        "x": 700,
+        "y": 740,
         "wires": [
             [
                 "696b778a.1fd128"
@@ -2269,8 +2060,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 370,
-        "y": 1200,
+        "x": 710,
+        "y": 780,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -2287,8 +2078,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 600,
-        "y": 1100,
+        "x": 900,
+        "y": 480,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -2305,29 +2096,11 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 360,
-        "y": 1240,
+        "x": 900,
+        "y": 440,
         "wires": [
             [
                 "10d4a47a.3363fc"
-            ]
-        ]
-    },
-    {
-        "id": "d6f35762.48d368",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "02.1x",
-        "func": "v = msg.payload.DataNo.value;\nif (v.match(/1[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 590,
-        "y": 560,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
             ]
         ]
     },
@@ -2344,8 +2117,8 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 470,
-        "y": 340,
+        "x": 850,
+        "y": 100,
         "wires": []
     },
     {
@@ -2369,8 +2142,8 @@
         "topic": "Toggle Tx",
         "payload": "",
         "payloadType": "date",
-        "x": 960,
-        "y": 880,
+        "x": 1400,
+        "y": 940,
         "wires": [
             [
                 "4e1e16c8.c0b818"
@@ -2387,8 +2160,8 @@
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is deployed.\ncontext.set(\"DisableTx\", false);\nnode.status({fill:\"green\",shape:\"dot\",text:\"connected\"});",
         "finalize": "",
-        "x": 660,
-        "y": 820,
+        "x": 1100,
+        "y": 880,
         "wires": [
             [
                 "fe23cbaf.cca308"
@@ -2399,14 +2172,50 @@
         "id": "2970c450.ad69dc",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "00.2x",
-        "func": "v = msg.payload.DataNo.value;\n\nif (v.match(/2[0-9]/)) {\n    switch(v){\n        case '20':\n            msg.data = '0'.repeat(4);\n            break;\n        case '28':\n            msg.data = '0'.repeat(4);\n            break;        \n        default:\n            msg.data = '0'.repeat(8);\n            break;\n    }\n    return msg;\n}",
+        "name": "00.xx",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v=='01'){\n    //msg.data='0000';\n    msg.data='0001';\n    return msg;\n}\n\nif (v=='12'){\n    msg.data='0004';\n    return msg;\n}\n\nif (v.match(/2[0-9]/)) {\n    switch(v){\n        case '20':\n            msg.data = '0'.repeat(4);\n            break;\n        case '28':\n            msg.data = '0'.repeat(4);\n            break;        \n        default:\n            msg.data = '0'.repeat(8);\n            break;\n    }\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 370,
-        "y": 1380,
+        "x": 110,
+        "y": 480,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "9a7d622d.2ece1",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Cmd==84",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='84'){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 700,
+        "y": 540,
+        "wires": [
+            [
+                "d8ac1b2c.10d1b8"
+            ]
+        ]
+    },
+    {
+        "id": "d8ac1b2c.10d1b8",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "84.0x",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v.match(/0[0-9A-C]/)){\n    msg.data='';\n    var i = parseInt(v, 16);\n    var g = parseInt(flow.get('85.0x')[0], 16);\n    var aa = flow.get('84.0x');\n    aa[g][i] = msg.payload.Data.value;\n    flow.set('84.0x', aa);\n    \n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 710,
+        "y": 580,
         "wires": [
             [
                 "6f2429ec.db07b8"
