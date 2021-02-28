@@ -272,7 +272,7 @@
         "z": "2526c01.e3cb34",
         "name": "",
         "pauseType": "delay",
-        "timeout": "10",
+        "timeout": "3",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1181,7 +1181,8 @@
         "wires": [
             [
                 "9bddedc1.86755",
-                "c7bfaa5f.ae04d8"
+                "c7bfaa5f.ae04d8",
+                "2970c450.ad69dc"
             ]
         ]
     },
@@ -1589,13 +1590,13 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "00.01",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='01'){\n    msg.data='0001';\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='01'){\n    msg.data='0000';\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 390,
-        "y": 500,
+        "x": 370,
+        "y": 1340,
         "wires": [
             [
                 "6f2429ec.db07b8"
@@ -1624,8 +1625,8 @@
         "id": "efbebc2b.1c26b",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "85.00",
-        "func": "v = msg.payload.DataNo.value;\n\nif (v=='00'){\n    msg.data='';\n    return msg;\n}",
+        "name": "85.0x",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v.match(/0[0-9]/)){\n    msg.data='';\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2299,7 +2300,7 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "Cmd==90",
-        "func": "v = msg.payload.Cmd.value;\nif (v=='8B'){\n    return msg;\n}",
+        "func": "v = msg.payload.Cmd.value;\nif (v=='90'){\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2391,6 +2392,24 @@
         "wires": [
             [
                 "fe23cbaf.cca308"
+            ]
+        ]
+    },
+    {
+        "id": "2970c450.ad69dc",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "00.2x",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v.match(/2[0-9]/)) {\n    switch(v){\n        case '20':\n            msg.data = '0'.repeat(4);\n            break;\n        case '28':\n            msg.data = '0'.repeat(4);\n            break;        \n        default:\n            msg.data = '0'.repeat(8);\n            break;\n    }\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 1380,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
             ]
         ]
     }
