@@ -237,8 +237,8 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 290,
-        "y": 340,
+        "x": 110,
+        "y": 320,
         "wires": []
     },
     {
@@ -262,8 +262,8 @@
         "z": "2526c01.e3cb34",
         "name": "RS232 Tx",
         "serial": "cc7fae7e.ad2a3",
-        "x": 500,
-        "y": 860,
+        "x": 1040,
+        "y": 840,
         "wires": []
     },
     {
@@ -281,8 +281,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 350,
-        "y": 860,
+        "x": 890,
+        "y": 840,
         "wires": [
             [
                 "8d0f4233.7ed23"
@@ -420,18 +420,21 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "SOH|STX",
-        "func": "if (msg.payload[0]==flow.get('SOH')){\n    return [msg, null];\n}else if (msg.payload[0]==flow.get('STX')){\n    return [null, msg];\n}",
-        "outputs": 2,
+        "func": "if (msg.payload[0]==flow.get('SOH')){\n    return [msg, null, null];\n}else if (msg.payload[0]==flow.get('STX')){\n    return [null, msg, null];\n}else if (msg.payload[0]==flow.get('EOT')){\n    msg.payload='EOT';\n    return [null, null, msg];\n}",
+        "outputs": 3,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 110,
+        "x": 100,
         "y": 200,
         "wires": [
             [
                 "666dfdf4.3ad5f4"
             ],
-            []
+            [],
+            [
+                "804ecdb.fdffe3"
+            ]
         ]
     },
     {
@@ -887,8 +890,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 130,
-        "y": 140,
+        "x": 120,
+        "y": 120,
         "wires": [
             [
                 "5f8b00c2.a4e16"
@@ -994,7 +997,8 @@
                 "ed427256.a3a68",
                 "6cda80d0.cd29c",
                 "21f1277c.210338",
-                "6230229e.78482c"
+                "6230229e.78482c",
+                "d6f35762.48d368"
             ]
         ]
     },
@@ -1003,7 +1007,7 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "02.70",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='70'){\n    msg.data=' '+'0'.repeat(14)+'1';\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='70'){\n    msg.data=' '+'0'.repeat(13)+'A0';\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1021,7 +1025,7 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "02.90",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='90'){\n    msg.data='S pulses';\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='90'){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1039,7 +1043,7 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "02.91",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='91'){\n    msg.data='C pulses';\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\nif (v=='91'){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1177,8 +1181,7 @@
         "wires": [
             [
                 "9bddedc1.86755",
-                "c7bfaa5f.ae04d8",
-                "595a019d.38c88"
+                "c7bfaa5f.ae04d8"
             ]
         ]
     },
@@ -1485,8 +1488,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 590,
-        "y": 720,
+        "x": 610,
+        "y": 700,
         "wires": []
     },
     {
@@ -1504,8 +1507,8 @@
         "wires": [
             [
                 "1ed93eb6.f83181",
-                "fe23cbaf.cca308",
-                "7228c952.4e3d08"
+                "7228c952.4e3d08",
+                "4e1e16c8.c0b818"
             ]
         ]
     },
@@ -1567,8 +1570,8 @@
         "id": "21f1277c.210338",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "02.20",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='20'){\n    msg.data='00FF';\n    return msg;\n}",
+        "name": "02.2x",
+        "func": "v = msg.payload.DataNo.value;\nif (v.match(/2[0-9]/)){\n    msg.data='0'.repeat(16);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1712,8 +1715,8 @@
         "id": "6230229e.78482c",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "02.60",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='60'){\n    msg.data='00FF';\n    return msg;\n}",
+        "name": "02.6x",
+        "func": "v = msg.payload.DataNo.value;\nif (v.match(/6[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2238,24 +2241,6 @@
         "wires": []
     },
     {
-        "id": "595a019d.38c88",
-        "type": "function",
-        "z": "2526c01.e3cb34",
-        "name": "00.28",
-        "func": "v = msg.payload.DataNo.value;\nif (v=='28'){\n    msg.data='0000';\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 390,
-        "y": 540,
-        "wires": [
-            [
-                "6f2429ec.db07b8"
-            ]
-        ]
-    },
-    {
         "id": "59386d44.566e14",
         "type": "function",
         "z": "2526c01.e3cb34",
@@ -2324,6 +2309,88 @@
         "wires": [
             [
                 "10d4a47a.3363fc"
+            ]
+        ]
+    },
+    {
+        "id": "d6f35762.48d368",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "02.1x",
+        "func": "v = msg.payload.DataNo.value;\nif (v.match(/1[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 590,
+        "y": 560,
+        "wires": [
+            [
+                "6f2429ec.db07b8"
+            ]
+        ]
+    },
+    {
+        "id": "804ecdb.fdffe3",
+        "type": "debug",
+        "z": "2526c01.e3cb34",
+        "name": "EOT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 470,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "bbd2454.ca4c3b8",
+        "type": "inject",
+        "z": "2526c01.e3cb34",
+        "name": "Disable Tx",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Toggle Tx",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1040,
+        "y": 900,
+        "wires": [
+            [
+                "4e1e16c8.c0b818"
+            ]
+        ]
+    },
+    {
+        "id": "4e1e16c8.c0b818",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "Disable Tx",
+        "func": "var v = context.get('DisableTx');\nif (msg.topic=='Toggle Tx'){\n    context.set('DisableTx', !v);\n}else if (!v){\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\ncontext.set(\"DisableTx\", false);",
+        "finalize": "",
+        "x": 670,
+        "y": 820,
+        "wires": [
+            [
+                "fe23cbaf.cca308"
             ]
         ]
     }
