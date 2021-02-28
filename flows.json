@@ -262,8 +262,8 @@
         "z": "2526c01.e3cb34",
         "name": "RS232 Tx",
         "serial": "cc7fae7e.ad2a3",
-        "x": 1040,
-        "y": 840,
+        "x": 960,
+        "y": 820,
         "wires": []
     },
     {
@@ -281,8 +281,8 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 890,
-        "y": 840,
+        "x": 810,
+        "y": 820,
         "wires": [
             [
                 "8d0f4233.7ed23"
@@ -2351,7 +2351,7 @@
         "id": "bbd2454.ca4c3b8",
         "type": "inject",
         "z": "2526c01.e3cb34",
-        "name": "Disable Tx",
+        "name": "Toggle Tx",
         "props": [
             {
                 "p": "payload"
@@ -2368,8 +2368,8 @@
         "topic": "Toggle Tx",
         "payload": "",
         "payloadType": "date",
-        "x": 1040,
-        "y": 900,
+        "x": 960,
+        "y": 880,
         "wires": [
             [
                 "4e1e16c8.c0b818"
@@ -2380,13 +2380,13 @@
         "id": "4e1e16c8.c0b818",
         "type": "function",
         "z": "2526c01.e3cb34",
-        "name": "Disable Tx",
-        "func": "var v = context.get('DisableTx');\nif (msg.topic=='Toggle Tx'){\n    context.set('DisableTx', !v);\n}else if (!v){\n    return msg;\n}",
+        "name": "Tx Switch",
+        "func": "var v = context.get('DisableTx');\n\nif (msg.topic=='Toggle Tx'){\n    if (!v)\n        node.status({fill:\"red\",shape:\"ring\",text:\"disconnected\"});\n    else\n        node.status({fill:\"green\",shape:\"dot\",text:\"connected\"});\n        \n    context.set('DisableTx', !v);\n}else if (!v){\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\ncontext.set(\"DisableTx\", false);",
+        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\ncontext.set(\"DisableTx\", false);\nnode.status({fill:\"green\",shape:\"dot\",text:\"connected\"});",
         "finalize": "",
-        "x": 670,
+        "x": 660,
         "y": 820,
         "wires": [
             [
