@@ -162,7 +162,7 @@
         "id": "237da972.5d69a6",
         "type": "ui_group",
         "name": "ui-table with commands",
-        "tab": "379a501f.53b59",
+        "tab": "",
         "order": 1,
         "disp": true,
         "width": "17",
@@ -172,64 +172,295 @@
         "id": "c91332c0.50c11",
         "type": "ui_group",
         "name": "commands",
-        "tab": "379a501f.53b59",
+        "tab": "",
         "order": 2,
         "disp": true,
         "width": "6",
         "collapse": false
     },
     {
-        "id": "379a501f.53b59",
-        "type": "ui_tab",
-        "name": "ui-table command",
-        "icon": "fa-table",
-        "disabled": false,
-        "hidden": false
-    },
-    {
         "id": "ff9fdb9a.7da098",
         "type": "ui_group",
         "name": "TEST",
-        "tab": "7dcc246f.ee661c",
+        "tab": "",
         "order": 1,
         "disp": false,
         "width": "8",
         "collapse": false
     },
     {
-        "id": "7dcc246f.ee661c",
-        "type": "ui_tab",
-        "name": "TEST",
-        "icon": "dashboard",
-        "order": 12,
-        "disabled": false,
-        "hidden": false
-    },
-    {
         "id": "51ce6aa1.620754",
         "type": "ui_group",
         "name": "ui_control",
-        "tab": "3b08fac0.8f06b6",
+        "tab": "",
         "order": 1,
         "disp": true,
         "width": "22",
         "collapse": false
     },
     {
-        "id": "3b08fac0.8f06b6",
+        "id": "62fab1b3.8bdc3",
+        "type": "mqtt-broker",
+        "name": "mqtt@utils",
+        "broker": "utils.clpham.internal",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "fb69a6a5.d14a",
+        "type": "mqtt-broker",
+        "name": "mqtt@localhost",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "aa4043c2.6a1ef8",
+        "type": "mqtt-broker",
+        "broker": "broker.shiftr.io",
+        "port": "1883",
+        "clientid": "input->",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "1e1e7393.973264",
+        "type": "mqtt-broker",
+        "name": "mqtt@utils",
+        "broker": "utils.clpham.internal",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "b04e7681.6fc4a",
+        "type": "mqtt-broker",
+        "broker": "localhost",
+        "port": "8883",
+        "tls": "4a6078de.6540e8",
+        "clientid": "",
+        "usetls": true,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "d4e53eb.b0f5cc",
+        "type": "mqtt-broker",
+        "broker": "broker.shiftr.io",
+        "port": "1883",
+        "clientid": "sensors->",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "7aba42bb.ae04bc",
+        "type": "mqtt-broker",
+        "name": "mqtt@utils",
+        "broker": "utils.clpham.internal",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "2dee2e04.7cf00a",
+        "type": "ui_group",
+        "name": "Test Messages",
+        "tab": "721af69.d130208",
+        "order": 1,
+        "disp": true,
+        "width": "9",
+        "collapse": false
+    },
+    {
+        "id": "721af69.d130208",
+        "type": "ui_tab",
+        "name": "Demo",
+        "icon": "dashboard"
+    },
+    {
+        "id": "435d299e.91f718",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "7ac377c5.e6ac08",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "7ac377c5.e6ac08",
+        "type": "ui_tab",
+        "name": "Tab1",
+        "icon": "dashboard"
+    },
+    {
+        "id": "e68a1b8a.416f18",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "6952137b.75c85c",
+        "order": 1,
+        "disp": false,
+        "width": "24",
+        "collapse": false
+    },
+    {
+        "id": "6952137b.75c85c",
         "type": "ui_tab",
         "name": "Home",
-        "icon": "track_changes",
+        "icon": "dashboard"
+    },
+    {
+        "id": "cce9f607.043b7",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.1.158",
+        "port": "1883",
+        "clientid": "test-client",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "120",
+        "cleansession": true,
+        "birthTopic": "sensors/connected/test-client",
+        "birthQos": "0",
+        "birthRetain": "true",
+        "birthPayload": "1",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "sensors/connected/test-client",
+        "willQos": "0",
+        "willRetain": "true",
+        "willPayload": "0"
+    },
+    {
+        "id": "8130ac76.081eb8",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "3d343106.1cdade",
         "order": 1,
-        "disabled": false,
-        "hidden": false
+        "disp": true,
+        "width": "4",
+        "collapse": false
+    },
+    {
+        "id": "7efb4fcd.d113d8",
+        "type": "ui_group",
+        "name": "Status",
+        "tab": "3d343106.1cdade",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "3d343106.1cdade",
+        "type": "ui_tab",
+        "name": "Logger",
+        "icon": "dashboard"
+    },
+    {
+        "id": "b8630066.5d446",
+        "type": "ui_group",
+        "name": "One dimension Array",
+        "tab": "f9ac9e91.20e588",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "f9ac9e91.20e588",
+        "type": "ui_tab",
+        "name": "Table Examples",
+        "icon": "dashboard",
+        "order": 1
     },
     {
         "id": "75b88026.ea13d",
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "RS232 Rx",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -433,7 +664,8 @@
             ],
             [],
             [
-                "804ecdb.fdffe3"
+                "804ecdb.fdffe3",
+                "5b97fca2.8dd974"
             ]
         ]
     },
@@ -1002,7 +1234,7 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "02.xx",
-        "func": "v = msg.payload.DataNo.value;\n\nif (v=='00'){\n    msg.data='00FF';\n    return msg;\n}\n\nif (v.match(/1[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v.match(/2[0-9]/)){\n    msg.data='0'.repeat(16);\n    return msg;\n}\n\nif (v.match(/6[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v=='70'){\n    msg.data=' '+'0'.repeat(13)+'A0';\n    return msg;\n}\n\nif (v.match(/9[0-1]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v.match(/C[0]/)){\n    //msg.data='0'.repeat(4);\n    msg.data='0'.repeat(4);\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\n\nif (v=='00'){\n    msg.data='00FF';\n    return msg;\n}\n\nif (v.match(/1[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v.match(/2[0-9]/)){\n    msg.data='0'.repeat(16);\n    return msg;\n}\n\nif (v.match(/6[0-9]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v=='70'){\n    //msg.data=' '+'0'.repeat(13)+'A0';\n    msg.data = ' ' + '0'.repeat(13) + 'C6';\n    return msg;\n}\n\nif (v.match(/9[0-1]/)){\n    msg.data='0'.repeat(8);\n    return msg;\n}\n\nif (v.match(/C[0]/)){\n    //msg.data='0'.repeat(4);\n    msg.data='0'.repeat(4);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1164,7 +1396,7 @@
         "type": "function",
         "z": "2526c01.e3cb34",
         "name": "05.xx",
-        "func": "v = msg.payload.DataNo.value;\nif (v.match(/0[C]/)) {\n    //msg.data = flow.get('84.0x')[i];\n    var i = parseInt(v, 16);\n    var g = parseInt(flow.get('85.0x')[0], 16);\n    var aa = flow.get('84.0x');\n    //msg.data = aa[g][i];\n    msg.data = '0'.repeate(8);\n    return msg;\n}\n\nif (v!=='00'){\n    msg.data='01FFF0' + v;\n    //msg.data = '0'.repeat(8);\n    return msg;\n}",
+        "func": "v = msg.payload.DataNo.value;\nif (v.match(/0[C]/)) {\n    //msg.data = flow.get('84.0x')[i];\n    var i = parseInt(v, 16);\n    var g = parseInt(flow.get('85.0x')[0], 16);\n    var aa = flow.get('84.0x');\n    //msg.data = aa[g][i];\n    msg.data = '0'.repeat(8);\n    return msg;\n}\n\nif (v!=='00'){\n    msg.data='01FFF0' + v;\n    //msg.data = '0'.repeat(8);\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1481,7 +1713,8 @@
         "y": 40,
         "wires": [
             [
-                "c0040bae.e9a918"
+                "c0040bae.e9a918",
+                "5b97fca2.8dd974"
             ]
         ]
     },
@@ -1490,7 +1723,7 @@
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "In Frame",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -1511,13 +1744,14 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "[{{payload.Cmd.value.0}}][{{payload.Cmd.value.1}}].[{{payload.DataNo.value.0}}][{{payload.DataNo.value.1}}]\n{{payload.Data.name}}={{payload.Data.value}}",
+        "template": "[{{payload.Cmd.value.0}}][{{payload.Cmd.value.1}}].[{{payload.DataNo.value.0}}][{{payload.DataNo.value.1}}] {{payload.Data.name}}={{payload.Data.value}}",
         "output": "str",
         "x": 670,
         "y": 80,
         "wires": [
             [
-                "c0040bae.e9a918"
+                "c0040bae.e9a918",
+                "5b97fca2.8dd974"
             ]
         ]
     },
@@ -1986,13 +2220,14 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "{{payload.Err.name}}={{payload.Err.value}}\n{{payload.Data.name}}={{payload.Data.value}}",
+        "template": "{{payload.Err.name}}={{payload.Err.value}} {{payload.Data.name}}={{payload.Data.value}}",
         "output": "str",
         "x": 1090,
         "y": 200,
         "wires": [
             [
-                "bdf28f1c.6b562"
+                "bdf28f1c.6b562",
+                "42dc1e50.bbca9"
             ]
         ]
     },
@@ -2011,7 +2246,8 @@
         "y": 160,
         "wires": [
             [
-                "bdf28f1c.6b562"
+                "bdf28f1c.6b562",
+                "42dc1e50.bbca9"
             ]
         ]
     },
@@ -2020,7 +2256,7 @@
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "Out Frame",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -2109,7 +2345,7 @@
         "type": "debug",
         "z": "2526c01.e3cb34",
         "name": "EOT",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": true,
@@ -2221,5 +2457,54 @@
                 "6f2429ec.db07b8"
             ]
         ]
+    },
+    {
+        "id": "42dc1e50.bbca9",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "mrj3Tx",
+        "func": "msg.topic = \"mrj3Tx\";\n\nvar moment = global.get('moment');\nvar t = moment().format('H:mm:ss');\n\nmsg.payload = t + ' Res: ' + msg.payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1110,
+        "y": 80,
+        "wires": [
+            [
+                "d28946a5.e09c18"
+            ]
+        ]
+    },
+    {
+        "id": "5b97fca2.8dd974",
+        "type": "function",
+        "z": "2526c01.e3cb34",
+        "name": "mrj3Rx",
+        "func": "msg.topic = \"mrj3Rx\";\n\nvar moment = global.get('moment');\nvar t = moment().format('H:mm:ss');\n\nmsg.payload = t + ' Cmd: ' + msg.payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1120,
+        "y": 40,
+        "wires": [
+            [
+                "d28946a5.e09c18"
+            ]
+        ]
+    },
+    {
+        "id": "d28946a5.e09c18",
+        "type": "mqtt out",
+        "z": "2526c01.e3cb34",
+        "name": "mqtt@localhost",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "fb69a6a5.d14a",
+        "x": 1300,
+        "y": 40,
+        "wires": []
     }
 ]
